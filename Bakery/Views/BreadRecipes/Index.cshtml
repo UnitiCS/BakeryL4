@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Bakery.Models.BreadRecipe>
+
+@{
+    ViewData["Title"] = "Рецептура";
+}
+
+<h1>Рецептура</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IngredientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityPerUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BakeryProduct)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IngredientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+                @{
+                    var ingredientName = item.Ingredient != null ? item.Ingredient.Name : null;
+                    var bakeryProductName = item.BakeryProduct != null ? item.BakeryProduct.Name : null;
+                }
+            <td>
+                @Html.DisplayFor(modelItem => ingredientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => bakeryProductName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BreadRecipeId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BreadRecipeId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BreadRecipeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
